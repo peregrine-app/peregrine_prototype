@@ -1,39 +1,32 @@
 import 'package:flutter/material.dart';
+import './routes/locations.dart';
+import './routes/home_page.dart';
 
-void main() {
-  runApp(PeregrineApp());
+void main() => runApp(PeregrineApp());
+
+class PeregrineApp extends StatefulWidget {
+  @override
+  _PeregrineAppState createState() => _PeregrineAppState();
 }
 
-const AppTitle = "Peregrine";
-const HeaderActions = ["Profile", "Locations", "Rewards"];
-
-class PeregrineApp extends StatelessWidget {
+class _PeregrineAppState extends State<PeregrineApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(
-        title: Text(AppTitle),
-        backgroundColor: Color.fromRGBO(40, 210, 40, 1),
-      ),
-      body: ListView(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: HeaderActions.map((String text) => RaisedButton(
-                  onPressed: () => {print("Pressed $text")},
-                  child: Text(text),
-                )).toList(),
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(elevation: 0, brightness: Brightness.light),
+          brightness: Brightness.light,
+          fontFamily: 'Helvetica Neue',
+          primaryColor: Colors.white,
+          textTheme: TextTheme(
+            title: TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+            body1: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(AppTitle,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 36,
-                ))
-          ])
-        ],
-      ),
-    ));
+        ),
+        initialRoute: '/',
+        routes: {
+          '/locations': (context) => Locations(),
+        },
+        home: HomePage());
   }
 }
